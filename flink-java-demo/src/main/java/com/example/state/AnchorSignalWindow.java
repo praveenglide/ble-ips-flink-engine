@@ -1,8 +1,12 @@
 package com.example.state;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
+import java.util.List;
 
+import com.example.filter.FilterPipeline;
 import com.example.model.AggregatedMeasurement;
 import com.example.model.MeasurementPayload;
 
@@ -102,6 +106,42 @@ public class AnchorSignalWindow {
         );
     }
 
+    public AggregatedMeasurement aggregateWithFilters(
+            String anchorId,
+            FilterPipeline filterPipeline
+    ) {
+        Deque<Double> azimuthRaw = getAzimuthValuesSnapshot();
+        Deque<Double> elevationRaw = getElevationValuesSnapshot();
+        Deque<Double> distanceRaw = getDistanceValuesSnapshot();
+
+        Deque<Double> azimuthPrepared = filterPipeline.apply(azimuthRaw);
+        Deque<Double> elevationPrepared = filterPipeline.apply(elevationRaw);
+        Deque<Double> distancePrepared = filterPipeline.apply(distanceRaw);
+
+        double finalAzimuth = medianOf(azimuthPrepared);
+        double finalElevation = medianOf(elevationPrepared);
+        double finalDistance = medianOf(distancePrepared);
+
+        return new AggregatedMeasurement(
+                anchorId,
+                finalAzimuth,
+                finalElevation,
+                finalDistance,
+                latestTimestamp
+        );
+    }
+
+    private double medianOf(Deque<Double> values) {
+        if (values == null || values.isEmpty()) {
+            return 0.0;
+        }
+
+        List<Double> sorted = new ArrayList<>(values);
+        Collections.sort(sorted);
+
+        return sorted.get(sorted.size() / 2);
+    }
+
     private double averageOf(Deque<Double> values) {
         if (values == null || values.isEmpty()) {
             return 0.0;
@@ -118,12 +158,12 @@ public class AnchorSignalWindow {
 
     @Override
     public String toString() {
-        return "AnchorSignalWindow{" +
-                "windowSize=" + windowSize +
-                ", azimuthValues=" + azimuthValues +
-                ", elevationValues=" + elevationValues +
-                ", distanceValues=" + distanceValues +
-                ", latestTimestamp=" + latestTimestamp +
-                '}';
+        return "AnchorSignalWindow{"
+                + "windowSize=" + windowSize
+                + ", azimuthValues=" + azimuthValues
+                + ", elevationValues=" + elevationValues
+                + ", distanceValues=" + distanceValues
+                + ", latestTimestamp=" + latestTimestamp
+                + '}';
     }
 }
