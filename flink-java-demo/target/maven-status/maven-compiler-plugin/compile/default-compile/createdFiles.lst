@@ -1,10 +1,10 @@
-com\example\KafkaMeasurementReadJob$AnchorSignalWindow.class
-com\example\KafkaMeasurementReadJob$AggregatedMeasurementSet.class
+com\example\model\MeasurementPayload.class
 com\example\filter\NumericFilter.class
 com\example\filter\EMAFilter.class
-com\example\KafkaMeasurementReadJob$AggregatedMeasurement.class
 com\example\filter\HampelFilter.class
-com\example\KafkaMeasurementReadJob$SimpleAggregationFunction.class
+com\example\job\KafkaMeasurementReadJob.class
+com\example\state\AnchorSignalWindow.class
 com\example\filter\FilterPipeline.class
-com\example\KafkaMeasurementReadJob$MeasurementPayload.class
-com\example\KafkaMeasurementReadJob.class
+com\example\function\SimpleAggregationFunction.class
+com\example\model\AggregatedMeasurementSet.class
+com\example\model\AggregatedMeasurement.class

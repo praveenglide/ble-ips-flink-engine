@@ -2,4 +2,9 @@ D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\EMAFilter.jav
 D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\FilterPipeline.java
 D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\HampelFilter.java
 D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\NumericFilter.java
-D:\flink-learning\flink-java-demo\src\main\java\com\example\KafkaMeasurementReadJob.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\function\SimpleAggregationFunction.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\job\KafkaMeasurementReadJob.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\model\AggregatedMeasurement.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\model\AggregatedMeasurementSet.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\model\MeasurementPayload.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\state\AnchorSignalWindow.java
