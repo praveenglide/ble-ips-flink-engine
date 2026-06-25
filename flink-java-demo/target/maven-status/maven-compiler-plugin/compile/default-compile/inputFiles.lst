@@ -1,4 +1,5 @@
-D:\flink-learning\flink-java-demo\src\main\java\com\example\BleJsonPositionJob.java
-D:\flink-learning\flink-java-demo\src\main\java\com\example\BlePositionJob.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\EMAFilter.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\FilterPipeline.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\HampelFilter.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\filter\NumericFilter.java
 D:\flink-learning\flink-java-demo\src\main\java\com\example\KafkaMeasurementReadJob.java
-D:\flink-learning\flink-java-demo\src\main\java\com\example\WordCountJob.java

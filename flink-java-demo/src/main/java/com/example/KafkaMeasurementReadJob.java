@@ -63,7 +63,7 @@ public class KafkaMeasurementReadJob {
         public long timestamp;
 
         public AggregatedMeasurement() {
-            // Required by Flink serialization
+            // Required by  serializFlinkation
         }
 
         public AggregatedMeasurement(
