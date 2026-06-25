@@ -1,0 +1,14 @@
+com\example\KafkaMeasurementReadJob$AnchorSignalWindow.class
+com\example\BlePositionJob$PositionResult.class
+com\example\BleJsonPositionJob$BleEvent.class
+com\example\WordCountJob$SplitWords.class
+com\example\BlePositionJob.class
+com\example\KafkaMeasurementReadJob$AggregatedMeasurement.class
+com\example\BlePositionJob$BleEvent.class
+com\example\KafkaMeasurementReadJob$MeasurementPayload.class
+com\example\KafkaMeasurementReadJob.class
+com\example\BleJsonPositionJob.class
+com\example\KafkaMeasurementReadJob$AggregatedMeasurementSet.class
+com\example\KafkaMeasurementReadJob$SimpleAggregationFunction.class
+com\example\BleJsonPositionJob$PositionResult.class
+com\example\WordCountJob.class
