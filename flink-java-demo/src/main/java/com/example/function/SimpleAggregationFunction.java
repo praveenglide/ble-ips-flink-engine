@@ -9,6 +9,9 @@ import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 
+import com.example.filter.EMAFilter;
+import com.example.filter.FilterPipeline;
+import com.example.filter.HampelFilter;
 import com.example.model.AggregatedMeasurement;
 import com.example.model.AggregatedMeasurementSet;
 import com.example.model.MeasurementPayload;
@@ -22,6 +25,8 @@ public class SimpleAggregationFunction
 
     private transient MapState<String, AnchorSignalWindow> anchorWindows;
 
+    private transient FilterPipeline filterPipeline;
+
     public SimpleAggregationFunction(int expectedAnchors, int windowSize) {
         this.expectedAnchors = expectedAnchors;
         this.windowSize = windowSize;
@@ -29,14 +34,22 @@ public class SimpleAggregationFunction
 
     @Override
     public void open(OpenContext openContext) throws Exception {
-        MapStateDescriptor<String, AnchorSignalWindow> descriptor =
-                new MapStateDescriptor<>(
+        MapStateDescriptor<String, AnchorSignalWindow> descriptor
+                = new MapStateDescriptor<>(
                         "anchor-windows",
                         String.class,
                         AnchorSignalWindow.class
                 );
 
         anchorWindows = getRuntimeContext().getMapState(descriptor);
+
+        filterPipeline = new FilterPipeline(
+                List.of(
+                        new HampelFilter(1.5),
+                        new EMAFilter(0.3)
+                )
+        );
+
     }
 
     @Override
