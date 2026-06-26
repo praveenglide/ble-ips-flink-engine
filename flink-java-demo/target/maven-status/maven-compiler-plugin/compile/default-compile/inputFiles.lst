@@ -7,4 +7,5 @@ D:\flink-learning\flink-java-demo\src\main\java\com\example\job\KafkaMeasurement
 D:\flink-learning\flink-java-demo\src\main\java\com\example\model\AggregatedMeasurement.java
 D:\flink-learning\flink-java-demo\src\main\java\com\example\model\AggregatedMeasurementSet.java
 D:\flink-learning\flink-java-demo\src\main\java\com\example\model\MeasurementPayload.java
+D:\flink-learning\flink-java-demo\src\main\java\com\example\serialization\AggregatedMeasurementKafkaSerializer.java
 D:\flink-learning\flink-java-demo\src\main\java\com\example\state\AnchorSignalWindow.java

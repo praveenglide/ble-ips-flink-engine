@@ -11,6 +11,11 @@ import com.example.function.SimpleAggregationFunction;
 import com.example.model.MeasurementPayload;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.example.model.AggregatedMeasurementSet;
+import com.example.serialization.AggregatedMeasurementKafkaSerializer;
+
+import org.apache.flink.connector.kafka.sink.KafkaSink;
+
 public class KafkaMeasurementReadJob {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -30,6 +35,12 @@ public class KafkaMeasurementReadJob {
                 .setValueOnlyDeserializer(new SimpleStringSchema())
                 .build();
 
+        KafkaSink<AggregatedMeasurementSet> aggregatedMeasurementSink =
+                KafkaSink.<AggregatedMeasurementSet>builder()
+                        .setBootstrapServers("192.168.6.163:9092")
+                        .setRecordSerializer(new AggregatedMeasurementKafkaSerializer())
+                        .build();
+
         DataStream<String> kafkaJsonStream = env.fromSource(
                 source,
                 WatermarkStrategy.noWatermarks(),
@@ -39,10 +50,13 @@ public class KafkaMeasurementReadJob {
         DataStream<MeasurementPayload> measurementStream = kafkaJsonStream
                 .map(json -> objectMapper.readValue(json, MeasurementPayload.class));
 
-        measurementStream
+        DataStream<AggregatedMeasurementSet> aggregatedStream = measurementStream
                 .keyBy(measurement -> measurement.tagId)
-                .process(new SimpleAggregationFunction(3, 6))
-                .print();
+                .process(new SimpleAggregationFunction(3, 6));
+
+        aggregatedStream.print();
+
+        aggregatedStream.sinkTo(aggregatedMeasurementSink);
 
         env.execute("Kafka Measurement Read Job");
     }

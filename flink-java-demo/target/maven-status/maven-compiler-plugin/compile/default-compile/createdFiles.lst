@@ -1,3 +1,4 @@
+com\example\serialization\AggregatedMeasurementKafkaSerializer.class
 com\example\model\MeasurementPayload.class
 com\example\filter\NumericFilter.class
 com\example\filter\EMAFilter.class
