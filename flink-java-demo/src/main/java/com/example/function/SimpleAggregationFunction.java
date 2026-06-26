@@ -96,7 +96,9 @@ public class SimpleAggregationFunction
             AnchorSignalWindow window = anchorWindows.get(anchorId);
 
             if (window != null && window.isReady()) {
-                aggregatedMeasurements.add(window.average(anchorId));
+                aggregatedMeasurements.add(
+                        window.aggregateWithFilters(anchorId, filterPipeline)
+                );;
             }
         }
 

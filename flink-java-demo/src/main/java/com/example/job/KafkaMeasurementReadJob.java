@@ -41,7 +41,7 @@ public class KafkaMeasurementReadJob {
 
         measurementStream
                 .keyBy(measurement -> measurement.tagId)
-                .process(new SimpleAggregationFunction(3, 3))
+                .process(new SimpleAggregationFunction(3, 6))
                 .print();
 
         env.execute("Kafka Measurement Read Job");
